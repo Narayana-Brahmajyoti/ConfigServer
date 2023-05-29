@@ -3,19 +3,13 @@ server:
 spring:
   cloud:
     gateway:
-      default-filters:
-        - name: LogFilter
       routes:
         - id: subscriptionRoute
-          uri: lb://subscription-service
+          uri: lb://SUBSCRIPTION-SERVICE
           predicates:
             - Path=/subscription/**
-          filters:
-            - name: SubscriptionFilter
         - id: courseRoute
-          uri: lb://course-service
+          uri: lb://COURSE-SERVICE
           predicates:
             - Path=/course/**
-          filters:
-            - AddRequestHeader=course-request-header, custom-course-request-header
-            - AddResponseHeader=course-response-header, custom-course-response-header
+          
