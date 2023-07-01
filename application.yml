@@ -1,15 +1,15 @@
 spring:
   zipkin:
-    base-url: http://localhost:9411/
+    base-url: http://zipkin-service:9411/
   rabbitmq:
     username: guest
     password: guest
-    host: localhost
+    host: rabbit-service
     port: 5672
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
 management:
   health:
     circuitbreakers:
@@ -27,12 +27,13 @@ management:
 info:
   author: Narayana Brahmajyoti
   mail: nbrahmajyoti@gmail.com
-  cel: 313313131
+  cel: 31991806018
 server:
   port: ${PORT:9999}
 message: Mensagem generica
 
 queue:
+  serie-service: queue-serie-service
   movie-service: queue-movie-service
 
 
@@ -50,14 +51,4 @@ resilience4j:
         permittedNumberOfCalssInHalfOpenState: 2
         automaticTransitionFromOpenToHalfIfOpenEnabled: true
 
-  retry:
-    instances:
-      movie-service:
-        maxAttempts: 3
-        waitDuration: 10s
-        retryExceptions:
-          - feign.FeignException$InternalServerError
-          - org.springframework.web.client.HttpServerErrorException
-          - java.util.concurrent.TimeoutException
-          - java.io.IOException
-        
+  
